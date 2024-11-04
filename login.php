@@ -1,4 +1,3 @@
-<p>hello</p>
 
 <?php
 // index.php
