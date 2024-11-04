@@ -1,8 +1,10 @@
 body {
-    background: linear-gradient(to right, #e0f7fa, #f0f4c3); /* Soft gradient from light teal to light yellow */
+    background: linear-gradient(to right, #b2d6dc, #dce0ad);
+    /* Soft gradient from light teal to light yellow */
     font-family: 'B Nazanin';
     font-size: 18px;
     font-weight: bold;
+    overflow: hidden;
 }
 
 .login-container {
@@ -16,7 +18,7 @@ body {
 
 .login-container h2 {
     text-align: center;
-    color: #007bff;
+    color: #073B4C;
 }
 
 .form-control {
@@ -24,14 +26,14 @@ body {
 }
 
 .btn-primary {
-    background-color: DodgerBlue;
+    background-color: #073B4C;
     border: none;
     font-size: 20px;
     height: 45px;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #032631;
 }
 
 .toggle-password {
@@ -47,12 +49,9 @@ body {
     font-size: 13px;
     position: absolute;
     bottom: -20px;
-    /* فاصله از پایین فیلد */
     left: 0;
-    /* مرکز در وسط فیلد */
     width: 100%;
     text-align: right;
-    /* متن را در وسط قرار می‌دهد */
 }
 
 .form-check-label {

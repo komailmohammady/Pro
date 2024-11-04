@@ -33,7 +33,14 @@ $conn->close();
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Css/dash.css" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <style>
+        .chart-container {
+            height: 300px; /* Adjust the height to make the chart smaller */
+            max-height: 300px; /* Maximum height of the chart */
+        }
+    </style>
 
     <script>
         setInterval(function() {
@@ -51,6 +58,43 @@ $conn->close();
                 document.getElementById('EmployeeReport').innerText = data.total_ShowEmployeeReport;
             });
         }, 60000);
+
+        // Load the Visualization API and the corechart package
+        google.charts.load('current', {'packages':['corechart']});
+        
+        // Set a callback to run when the Google Visualization API is loaded
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Prepare the data
+            var chartDataInternal = <?php echo json_encode($chartDataInternal); ?>;
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Did Reports');
+            data.addColumn('number', 'درصد بهبود');
+
+            // Add rows of data
+            Object.keys(chartDataInternal).forEach(function(key) {
+                data.addRow([key, chartDataInternal[key]]);
+            });
+
+            // Set chart options
+            var options = {
+                title: 'درصد بهبود',
+                height: 300, // Set the height of the chart
+                legend: { position: 'bottom' },
+                hAxis: {
+                    title: 'Did Reports'
+                },
+                vAxis: {
+                    title: 'درصد بهبود',
+                    minValue: 0
+                }
+            };
+
+            // Instantiate and draw the chart
+            var chart = new google.visualization.ColumnChart(document.getElementById('myChart'));
+            chart.draw(data, options);
+        }
     </script>
 </head>
 <body dir="rtl">
@@ -103,11 +147,8 @@ $conn->close();
                 
                 <!-- Main Content of Dashboard -->
                 <div class="chart-container mt-4">
-                    <canvas id="myChart"></canvas>
+                    <div id="myChart" class="chart-container"></div>
                 </div>
-
-
-
                 <!-- Message Modal -->
                 <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -132,70 +173,13 @@ $conn->close();
                 <!-- Bootstrap JS and dependencies -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="js/Search.js"></script>
-
-                <!-- Chart.js Setup with Dynamic Data -->
-                <script>
-                    var chartDataInternal = <?php echo json_encode($chartDataInternal); ?>;
-                    
-                    // Convert chartDataInternal into labels and data arrays
-                    var labels = Object.keys(chartDataInternal);
-                    var dataValues = Object.values(chartDataInternal);
-
-                    // Get the context of the canvas
-                    var ctx = document.getElementById('myChart').getContext('2d');
-
-                    // Create a new chart
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'درصد بهبود',
-                                data: dataValues,
-                                backgroundColor: [
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)',
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    labels: {
-                                        font: {
-                                            size: 14
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>
 </div>
-                <!-- Footer -->
-                <footer>
-                    <p>&copy; 2024 تمامی حقوق محفوظ است. طراحی شده توسط محصلین ممتاز تکنالوژی کمپیوتر.</p>
-                </footer>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 تمامی حقوق محفوظ است. طراحی شده توسط محصلین ممتاز تکنالوژی کمپیوتر.</p>
+</footer>
 </body>
 </html>
