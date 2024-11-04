@@ -1,0 +1,60 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'B Nazanin';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+.form-control {
+    height: 45px;
+}
+
+.btn-primary {
+    background-color: DodgerBlue;
+    border: none;
+    font-size: 20px;
+    height: 45px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    top: 73%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.text-danger {
+    color: red;
+    font-size: 13px;
+    position: absolute;
+    bottom: -20px;
+    /* فاصله از پایین فیلد */
+    left: 0;
+    /* مرکز در وسط فیلد */
+    width: 100%;
+    text-align: right;
+    /* متن را در وسط قرار می‌دهد */
+}
+
+.form-check-label {
+    margin-right: 35px;
+}

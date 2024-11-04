@@ -1,0 +1,154 @@
+* {
+    font-family: 'B Nazanin';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'BNazanin';
+    src: url('path-to-font/BNazanin.woff2') format('woff2');
+}
+
+:root {
+    --primary-color: DodgerBlue;
+    --text-color: white;
+}
+
+body {
+    margin: 0;
+    font-family: 'BNazanin', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding-top: 20px;
+}
+
+.sidebar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sidebar a:hover {
+    background-color: #0056b3;
+    border-radius: 10px;
+    /* Darker shade on hover */
+}
+
+.content {
+    padding: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    /* Remove border for modern look */
+}
+
+.sidebar i {
+    margin-right: 10px;
+}
+
+/* Logo Styles */
+.logo-img {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
+
+/* Footer Styles */
+footer {
+    background-color: DodgerBlue;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Main BODY Section */
+.main--content {
+    position: relative;
+    background: #f8f9fa;
+    width: 100%;
+    padding: 1rem;
+}
+
+.header--wrapper img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 2rem;
+    margin-bottom: 1rem;
+}
+
+.header--title {
+    color: #143e70;
+}
+
+.user--info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search--box {
+    background: rgb(237, 237, 237);
+    border-radius: 30px;
+    color: rgba(113, 99, 186, 255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+
+.search--box input {
+    background: transparent;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+}
+
+.search--box i {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.search--box i:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        height: auto;
+        /* Change height for small screens */
+    }
+
+    .content {
+        margin-left: 0;
+        /* Adjust margin */
+    }
+}
