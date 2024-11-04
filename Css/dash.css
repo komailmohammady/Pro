@@ -5,12 +5,12 @@
 }
 
 @font-face {
-    font-family: 'BNazanin';
+    font-family: 'B Nazanin';
     src: url('path-to-font/BNazanin.woff2') format('woff2');
 }
 
 :root {
-    --primary-color: DodgerBlue;
+    --primary-color: #073B4C;
     --text-color: white;
 }
 
@@ -21,6 +21,9 @@ body {
 }
 
 .sidebar {
+    z-index: 1000;
+    /* Make sure it stays above other elements */
+    position: fixed;
     height: 100vh;
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -30,20 +33,21 @@ body {
 .sidebar a {
     color: var(--text-color);
     text-decoration: none;
-    padding: 15px;
+    padding: 10px;
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .sidebar a:hover {
-    background-color: #0056b3;
+    background-color: #032631;
     border-radius: 10px;
     /* Darker shade on hover */
 }
 
 .content {
-    padding: 20px;
+    padding: 10px;
+    margin-right: 220px;
 }
 
 .card {
@@ -67,7 +71,7 @@ body {
 
 /* Footer Styles */
 footer {
-    background-color: DodgerBlue;
+    background-color: #073B4C;
     color: white;
     text-align: center;
     padding: 10px 0;
