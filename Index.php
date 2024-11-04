@@ -1,3 +1,26 @@
+<?php  
+include 'PHP/ConnectionToDatabase.php';
+
+// Fetch internal plan data
+$sql_internal = "SELECT e.Did_Reports, 
+                        COALESCE(SUM(CAST(REPLACE(er.improve_precentage, '%', '') AS UNSIGNED)), 0) AS total_percentage 
+                 FROM (SELECT DISTINCT Did_Reports FROM employeereport) e
+                 LEFT JOIN employeereport er 
+                       ON e.Did_Reports = er.Did_Reports AND er.Plane IN ('پلان مربوطه')
+                 GROUP BY e.Did_Reports";
+
+// Prepare data for JavaScript
+$chartDataInternal = [];
+
+// Get internal plan data
+if ($result_internal = $conn->query($sql_internal)) {
+    while($row = $result_internal->fetch_assoc()) {
+        $chartDataInternal[$row['Did_Reports']] = (int)$row['total_percentage'];
+    }
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -10,6 +33,99 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- B Nazanin Font -->
     <link href="https://fonts.ir/font/b-nazanin.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawCharts);
+
+      var chartDataInternal = [
+        ['کارمند', 'فیصدي'],
+        <?php
+          foreach($chartDataInternal as $employee => $percentage) {
+              echo "['" . $employee . "', " . $percentage . "],";
+          }
+        ?>
+      ];
+
+      function drawCharts() {
+        var dataInternal = google.visualization.arrayToDataTable(chartDataInternal);
+        var options = {
+          title: 'گراف پلان عملیاتی کارمندان',
+          titleTextStyle: {
+            color: '#073B4C',
+            fontSize: 24,
+            bold: true,
+          },
+          width: '100%',
+          height: 350,
+          hAxis: {
+            minValue: 0,
+            textStyle: {
+              color: '#073B4C',
+              fontSize: 14,
+            },
+            titleTextStyle: {
+              color: '#073B4C',
+              fontSize: 16,
+              bold: true
+            }
+          },
+          vAxis: {
+            textStyle: {
+              color: '#073B4C',
+              fontSize: 14,
+            },
+            titleTextStyle: {
+              color: '#073B4C',
+              fontSize: 16,
+              bold: true
+            }
+          },
+          colors: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'], // Google Colors
+          legend: { position: 'top', alignment: 'end', textStyle: { color: '#073B4C', fontSize: 14 } },
+          fontName: 'B Nazanin',
+          backgroundColor: '#f7f7f7',
+          chartArea: { width: '90%', height: '50%' }, // Make the chart area larger
+        };
+        
+        var chartInternal = new google.visualization.ColumnChart(document.getElementById('barchartInternal'));
+        chartInternal.draw(dataInternal, options);
+      }
+
+      window.onresize = drawCharts;
+    </script>
+    <style>
+        body {
+            font-family: 'B Nazanin', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e9ecef; /* Light gray background */
+        }
+        h2.chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #073B4C; /* Main color for titles */
+            font-size: 24px; /* Larger font size for better visibility */
+        }
+        .charts-container {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;  /* Center the charts */
+            padding: 20px; /* Add padding around the chart */
+            background-color: white; /* White background for contrast */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            border-radius: 10px; /* Rounded corners */
+        }
+        #barchartInternal {
+            width: 100%; /* Make it responsive */
+            height: 400px; /* Set height */
+        }
+    </style>
 </head>
 <body dir="rtl">
 <div class="container-fluid">
@@ -80,46 +196,19 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h2>داشبورد</h2>
                 <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="search" id="searchInput" placeholder="جستجو" class="form-control" aria-label="جستجو">
+                    <span class="input-group-text">جستجو</span>
+                    <input type="text" class="form-control" placeholder="نام کارمند را وارد کنید" aria-label="Search">
                 </div>
             </div>
 
-            <!-- Main Content Here -->
-
-            <!-- Footer -->
-            <footer class="footer mt-auto py-3" style="background-color: #073B4C; color: white;">
-                <div class="container">
-                    <p class="text-center mb-0">&copy; 2024 تمامی حقوق محفوظ است. طراحی شده توسط محصلین ممتاز تکنالوژی کمپیوتر.</p>
-                </div>
-            </footer>
-
-            <!-- Message Modal -->
-            <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="messageModalLabel">ارسال پیام</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="messageForm" action="">
-                                <div class="mb-3">
-                                    <label for="message" class="form-label">پیام:</label>
-                                    <textarea class="form-control" id="message" rows="12" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">ارسال</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="charts-container">
+                <div id="barchartInternal"></div>
             </div>
-
-            <!-- Bootstrap JS and dependencies -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="js/Search.js"></script>
         </main>
     </div>
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
