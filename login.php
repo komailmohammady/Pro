@@ -1,5 +1,4 @@
-<p>hello world
-</p>
+
 
 <?php
 // index.php
