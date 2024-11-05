@@ -9,47 +9,6 @@
     <link rel="stylesheet" href="../Css/dash.css" type="text/css">
     <link rel="stylesheet" href="../Css/Employee_Report.css" type="text/css">
     <script src="../js/script.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .form-control {
-            height: 40px;
-        }
-        .sidebar {
-            height: 100vh;
-            overflow-y: auto;
-        }
-        .main-content {
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            color: DodgerBlue;
-            padding: 20px;
-            border-radius: 20px;
-        }
-        .header h1 {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        .btn {
-            padding: 10px;
-            background-color: DodgerBlue;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'B Nazanin';
-            font-weight: bold;
-            width: 330px;
-        }
-    </style>
 </head>
 <body dir="rtl">
 <div class="container-fluid">

@@ -15,32 +15,6 @@ $result = $conn->query($sql);
     <title>جدول کارمندان</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="../js/script.js"></script>
-    <style>
-    * {
-        font-family: 'B Nazanin';
-    }
-    .table-custom {
-        border: 1px solid #ddd;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 0; /* Reduced margin */
-    }
-    .table-custom th {
-        background-color: #007bff;
-        color: white;
-        text-align: center;
-    }
-    .table-custom td {
-        text-align: center;
-    }
-    .table-custom .btn {
-        margin: 1px;
-    }
-    .table-responsive {
-        margin: 0; /* Reduced margin for the container */
-    }
-</style>
 </head>
 <body dir="rtl">
 <div class="container mt-5">
