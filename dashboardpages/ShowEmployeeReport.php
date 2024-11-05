@@ -108,53 +108,59 @@ $result = $conn->query($sql);
             <button type="submit" class="btn btn-success">جستجو</button>
         </form>
     </div>
-
-    <div class="table-responsive mb-4">
-        <table class="table table-bordered table-custom">
-            <thead>
-                <tr>
-                    <th>آی دی</th>
-                    <th>نام کاربر</th>
-                    <th>گزارش فعالیت های انجام شده</th>
-                    <th>زمان اجرای فعالیت</th>
-                    <th>پلان</th>
-                    <th>فیصدی پیشرفت</th>
-                    <th>نتیجه/دستاورد</th>
-                    <th>مشکلات/نواقص و کمبودات</th>
-                    <th> راه حل پیشنهادی</th>
-                    <th>تاریخ</th>
-                    <th>ملاحظات</th>
-                    <th class="hide-on-print">عملیات</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['ID']) ?></td>
-                        <td><?= htmlspecialchars($row['Username']) ?></td>
-                        <td><?= htmlspecialchars($row['Did_Reports']) ?></td>
-                        <td><?= htmlspecialchars($row['Activity_Time']) ?></td>
-                        <td><?= htmlspecialchars($row['Plane']) ?></td>
-                        <td><?= htmlspecialchars($row['Improve_Precentage']) ?></td>
-                        <td><?= htmlspecialchars($row['Result']) ?></td>
-                        <td><?= htmlspecialchars($row['Problems']) ?></td>
-                        <td><?= htmlspecialchars($row['Resolve_Sugestion']) ?></td>
-                        <td><?= htmlspecialchars($row['Date']) ?></td>
-                        <td><?= htmlspecialchars($row['Observation']) ?></td>
-                        <td class="hide-on-print">
-                            <a href='../PHP/Update_Employee_Report.php?ID=<?= $row['ID'] ?>' class='btn btn-warning btn-icon'>
-                                <i class="fas fa-edit"></i>
+            <div class="table-responsive mb-4">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-dark">
+            <tr>
+                <th>آی دی</th>
+                <th>نام کاربر</th>
+                <th>گزارش فعالیت</th>
+                <th>زمان اجرای فعالیت</th>
+                <th>پلان</th>
+                <th>فیصدی پیشرفت</th>
+                <th>نتیجه/دستاورد</th>
+                <th>مشکلات</th>
+                <th>راه حل پیشنهادی</th>
+                <th>تاریخ</th>
+                <th>ملاحظات</th>
+                <th class="hide-on-print">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($result && $result->num_rows > 0) {
+                // Output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                        <td>" . htmlspecialchars($row['ID']) . "</td>
+                        <td>" . htmlspecialchars($row['Username']) . "</td>
+                        <td>" . htmlspecialchars($row['Did_Reports']) . "</td>
+                        <td>" . htmlspecialchars($row['Activity_Time']) . "</td>
+                        <td>" . htmlspecialchars($row['Plane']) . "</td>
+                        <td>" . htmlspecialchars($row['Improve_Precentage']) . "</td>
+                        <td>" . htmlspecialchars($row['Result']) . "</td>
+                        <td>" . htmlspecialchars($row['Problems']) . "</td>
+                        <td>" . htmlspecialchars($row['Resolve_Sugestion']) . "</td>
+                        <td>" . htmlspecialchars($row['Date']) . "</td>
+                        <td>" . htmlspecialchars($row['Observation']) . "</td>
+                        <td class='hide-on-print'>
+                            <a href='../PHP/Update_Employee_Report.php?ID=" . htmlspecialchars($row['ID']) . "' class='btn btn-warning btn-sm' title='ویرایش'>
+                                <i class='bi bi-pencil'></i>
                             </a>
-                            <button class='btn btn-danger btn-icon' onclick="confirmDelete('../PHP/delete_Employee_Report.php?ID=<?= $row['ID'] ?>');">
-                                <i class="fas fa-trash-alt"></i>
+                            <button class='btn btn-danger btn-sm' onclick=\"confirmDelete('../PHP/delete_Employee_Report.php?ID=" . htmlspecialchars($row['ID']) . "');\" title='حذف'>
+                                <i class='bi bi-trash'></i>
                             </button>
                         </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
+                    </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='12' class='text-center'>هیچ اطلاعاتی موجود نیست</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -165,16 +171,16 @@ $result = $conn->query($sql);
             text: "این گزارش قابل بازگشت نیست!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'بله، حذف کن!',
-            cancelButtonText: 'خیر، منصرف شدم'
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "بله، حذف کن!"
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = url;
             }
         });
     }
+
     function printPage() {
         window.print();
     }

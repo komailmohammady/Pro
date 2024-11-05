@@ -41,8 +41,8 @@
             </div>
             <!-- Main Content Area -->
             <div class="col-md-10 content mr-2">
-            <div class="header">
-                    <h1>فارمت گزارشدهی کارمندان</h1>
+            <div class="header text-center mt-3 mb-4">
+                    <h1><b>فارمت گزارشدهی کارمندان</b></h1>
                 </div>
 
                 <form action="../PHP/EmployeeReportAdd.php" method="post" id="form" enctype="multipart/form-data">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
+                    <div class="text-center col-md-3">
                         <button type="submit" class="btnn">ثبت گزارشات</button>
                     </div>
                 </form>
