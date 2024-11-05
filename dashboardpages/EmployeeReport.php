@@ -41,7 +41,7 @@
             </div>
             <!-- Main Content Area -->
             <div class="col-md-10 content mr-2">
-            <div class="header text-center mt-3 mb-4">
+                <div class="header text-center mt-3 mb-4">
                     <h1><b>فارمت گزارشدهی کارمندان</b></h1>
                 </div>
 

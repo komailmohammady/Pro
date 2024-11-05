@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../Css/dash.css" type="text/css">
-    <link rel="stylesheet" href="../Css/Employee_Report.css" type="text/css">
     <script src="../js/script.js"></script>
 </head>
 <body dir="rtl">
@@ -43,14 +42,14 @@
             
         <!-- ناحیه محتوای اصلی -->
         <div class="col-md-10 content mr-2">
-            <div class="header">
-                <h1>فرم ثبت کارمندان ریاست امور متعلمین و محصلین</h1>
+        <div class="header text-center mt-3 mb-4">
+                <h1><b>فرم ثبت کارمندان ریاست امور متعلمین و محصلین</b></h1>
             </div>
 
             <!-- فرم ثبت کارمند -->
             <form action="../PHP/EmployeeRegisterAddCodes.php" method="post" id="form">
                 <div class="row">
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4 mb-3">
                         <label for="UserName">آی‌دی</label>
                         <input type="number" id="UserName" name="ID" class="form-control">
                     </div>
@@ -121,16 +120,16 @@
                     <div class="col-md-4 mb-2 position-relative">
                         <label for="state">رمز عبور</label>
                         <input type="password" id="state" name="Password" class="form-control">
-                        <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword1" onclick="togglePassword('state', 'togglePassword1')"></i>
+                        <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:25px;margin-top:2px;" id="togglePassword1" onclick="togglePassword('state', 'togglePassword1')"></i>
                     </div>
                     <div class="col-md-4 mb-2 position-relative">
                         <label for="prob">تایید رمز عبور</label>
                         <input type="password" id="prob" name="Conform_Password" class="form-control">
-                        <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword2" onclick="togglePassword('prob', 'togglePassword2')"></i>
+                        <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:25px;margin-top:2px;" id="togglePassword2" onclick="togglePassword('prob', 'togglePassword2')"></i>
                     </div>
                 </div>
                 
-                <div class="text-center"> <!-- دکمه‌های ثبت و پاک کردن فرم -->
+                <div class="text-center col-md-3 "> <!-- دکمه‌های ثبت و پاک کردن فرم -->
                     <button type="submit" class="btnn">راجستر</button>
                 </div>
             </form>
