@@ -33,6 +33,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="../Css/kamadatepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../Css/dash.css" type="text/css">
     <script src="../js/script.js"></script>
 </head>
@@ -68,18 +69,18 @@ $result = $conn->query($sql);
     <!-- Header with Logo Placeholders -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <img src="../img/emarat.jpg " alt="Left Logo" style="height:50px;">
+            <img src="../img/emarat.jpg " alt="Left Logo" style="height:80px;">
         </div>
-        <h2 class="mb-0 text-center"> 
+        <h6 class="mb-0 text-center"> 
             <b>
                 <p>امارت اسلامی افغانستان</p>   
                 <p>اداره تعلیمات تخنیکی و مسلکی</p>   
                 <p>معاونیت امور تخنیکی و مسلکی</p>   
                 <p>گزارش ماه (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) سال (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) </p>
             </b>
-        </h2>
+        </h6>
         <div>
-            <img src="../img/thakhnik.png" alt="Right Logo" style="height:50px;">
+            <img src="../img/thakhnik.png" alt="Right Logo" style="height:80px;">
         </div>
     </div>
 

@@ -46,56 +46,56 @@
                 </div>
 
                 <form action="../PHP/EmployeeReportAdd.php" method="post" id="form" enctype="multipart/form-data">
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="Report">گزارش فعالیت های انجام شده</label>
                             <input type="text" id="Report" name="Did_Reports" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="Time">زمان اجرای فعالیت</label>
                             <input type="text" id="Time" name="Activity_Time" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="Plane">پلان</label>
                             <select name="Plane" class="form-control">
-                                <option value="پلان مربوطه">پلان مربوطه</option>
+                                <option value="پلان مربوطه">پلان عملیاتی</option>
                                 <option value="خارج از پلان">خارج از پلان</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="persent">فیصدی پیشرفت</label>
                             <input type="text" id="persent" name="Improve_Precentage" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="state">نتیجه/دستاورد</label>
                             <input type="text" id="state" name="Result" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="date">تاریخ</label>
                             <input type="text" id="datepacker" name="Date" class="form-control">
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="prob">مشکلات/نواقص و کمبودات</label>
                             <input type="text" id="prob" name="Problems" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="solve">راه حل پیشنهادی</label>
                             <input type="text" id="solve" name="Resolve_Sugestion" class="form-control">
                         </div>
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="Observation">ملاحظات</label>
                             <input type="text" id="Observation" name="Observation" class="form-control">
                         </div>
                     </div>
 
-                    <div class="form-row" style="justify-content: center;">
-                        <button type="submit" class="btn btn-primary">ثبت گزارشات</button>
+                    <div class="text-center">
+                        <button type="submit" class="btnn">ثبت گزارشات</button>
                     </div>
                 </form>
             </div>
@@ -115,7 +115,7 @@
                             <label for="message" class="form-label">پیام:</label>
                             <textarea class="form-control" id="message" rows="12" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">ارسال</button>
+                        <button type="submit" class="btnn">ارسال</button>
                     </form>
                 </div>
             </div>

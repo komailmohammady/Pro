@@ -1,33 +1,22 @@
-* {
-    font-family: 'B Nazanin';
-    font-size: 18px;
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: 'B Nazanin';
-    src: url('path-to-font/BNazanin.woff2') format('woff2');
-}
-
-:root {
-    --primary-color: #073B4C;
-    --text-color: white;
-}
-
+/* General Styles */
 body {
     margin: 0;
-    font-family: 'BNazanin', sans-serif;
+    font-family: 'B Nazanin', sans-serif;
     background-color: #f8f9fa;
 }
 
 .sidebar {
-    z-index: 1000;
-    /* Make sure it stays above other elements */
     position: fixed;
-    height: 100vh;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    top: 0;
+    bottom: 0;
+    width: 225px;
+    background-color: #073B4C;
+    color: white;
     padding-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    overflow-y: auto;
+    /* Enable scrolling for the sidebar if needed */
 }
 
 .sidebar a {
@@ -42,26 +31,13 @@ body {
 .sidebar a:hover {
     background-color: #032631;
     border-radius: 10px;
-    /* Darker shade on hover */
 }
 
 .content {
-    padding: 10px;
     margin-right: 220px;
+    padding: 15px;
 }
 
-.card {
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
-    /* Remove border for modern look */
-}
-
-.sidebar i {
-    margin-right: 10px;
-}
-
-/* Logo Styles */
 .logo-img {
     display: block;
     margin: 0 auto;
@@ -69,40 +45,24 @@ body {
     height: auto;
 }
 
-/* Footer Styles */
+/* Footer */
 footer {
     background-color: #073B4C;
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: relative;
-    bottom: 0;
     width: 100%;
 }
 
-/* Main BODY Section */
-.main--content {
-    position: relative;
-    background: #f8f9fa;
-    width: 100%;
-    padding: 1rem;
-}
-
-.header--wrapper img {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
+/* Header */
 .header--wrapper {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background: #fff;
-    border-radius: 10px;
-    padding: 10px 2rem;
     margin-bottom: 1rem;
 }
 
@@ -110,16 +70,9 @@ footer {
     color: #143e70;
 }
 
-.user--info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .search--box {
-    background: rgb(237, 237, 237);
+    background: #ededed;
     border-radius: 30px;
-    color: rgba(113, 99, 186, 255);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -128,45 +81,76 @@ footer {
 
 .search--box input {
     background: transparent;
-    padding: 10px 15px;
     border: none;
     outline: none;
+    padding: 8px 10px;
 }
 
 .search--box i {
-    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    font-size: 1.2rem;
 }
 
-.search--box i:hover {
-    transform: scale(1.2);
+/* Chart Container */
+.chart-container {
+    margin-top: 20px;
+    height: 300px;
+    max-height: 300px;
+}
+
+/* Modal */
+.modal .modal-content {
+    border-radius: 10px;
+}
+
+.btnn {
+    background: #073B4C;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.btnn:hover {
+    background: #032631;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
     .sidebar {
         position: relative;
+        width: 100%;
         height: auto;
-        /* Change height for small screens */
     }
 
     .content {
-        margin-left: 0;
-        /* Adjust margin */
+        margin-right: 0;
+        padding: 10px;
+    }
+
+    .header--wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo-img {
+        width: 150px;
     }
 }
 
-.btn {
-    background: #073B4C;
-    color: white;
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
+/* تغییرات برای محتوای اصلی (content) */
+.container {
+    margin-right: 225px;
+    padding: 15px;
+    transition: margin-right 0.3s ease;
 }
 
-.btn:hover {
-    background: #032631;
-    color: white;
+/* وقتی صفحه کوچک‌تر از 768px باشد، فاصله از بین می‌رود */
+@media (max-width: 768px) {
+    .container {
+        margin-right: 0;
+    }
 }
