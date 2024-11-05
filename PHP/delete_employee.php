@@ -11,20 +11,16 @@ if (isset($_GET['ID'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $ID);
 
-    // اجرای کوئری و بررسی موفقیت آن
-    if ($stmt->execute()) {
-        // نمایش پیام موفقیت در حذف و هدایت به لیست کارمندان
-        echo "<script>
-            alert('کارمند با موفقیت حذف شد.');
+    // نمایش پیام تایید قبل از حذف
+    echo "<script>
+        if (confirm('آیا مطمئن هستید که می‌خواهید این کارمند را حذف کنید؟')) {
+            // اجرای کوئری حذف در صورت تایید
+            window.location.href = '../PHP/delete_employee_process.php?ID=" . $ID . "';
+        } else {
+            // برگشت به صفحه نمایش کارمندان در صورت لغو
             window.location.href = '../dashboardpages/ShowEmployee.php';
-        </script>";
-    } else {
-        // نمایش پیام خطا در حذف
-        echo "<script>
-            alert('خطا در حذف کارمند: " . $stmt->error . "');
-            window.location.href = '../dashboardpages/ShowEmployee.php';
-        </script>";
-    }
+        }
+    </script>";
 } else {
     // پیام خطا در صورت نبودن شناسه کارمند
     echo "<script>

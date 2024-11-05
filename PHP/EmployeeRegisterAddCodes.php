@@ -8,8 +8,6 @@ if (isset($_POST['submit'])) {
     $name = $_POST['Name'];
     $lastName = $_POST['LastName'];
     $fatherName = $_POST['FatherName'];
-    $phone = $_POST['Phone'];
-    $email = $_POST['Email'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $postType = $_POST['PostType'];
@@ -17,9 +15,11 @@ if (isset($_POST['submit'])) {
     $postNo = $_POST['PostNo'];
     $releventDep = $_POST['ReleventDep'];
     $observation = $_POST['Observation'];
+    $email = $_POST['email']; // New email field
+    $phone = $_POST['phone']; // New phone field
 
     // Checking if fields are filled
-    if (empty($id) || empty($name) || empty($lastName) || empty($phone) || empty($email) || empty($fatherName) || empty($username) || empty($password) || empty($postType) || empty($jobType) || empty($postNo) || empty($releventDep)) {
+    if (empty($id) || empty($name) || empty($lastName) || empty($fatherName) || empty($username) || empty($password) || empty($postType) || empty($jobType) || empty($postNo) || empty($releventDep) || empty($email) || empty($phone)) {
         ?>
         <script>
             alert("لطفاً تمام فیلدها را پر کنید!");
@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepare the SQL statement
-        $stmt = $conn->prepare("INSERT INTO employee_register (ID, Name, LastName, FatherName,Phone, Email, Username, Password, PostType, JobType, PostNo, ReleventDep, Observation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issssssssss", $id, $name, $lastName, $fatherName, $username, $hashedPassword, $postType, $jobType, $postNo, $releventDep, $observation);
+        $stmt = $conn->prepare("INSERT INTO employee_register (ID, Name, LastName, FatherName, Username, Password, PostType, JobType, PostNo, ReleventDep, Observation, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issssssssssss", $id, $name, $lastName, $fatherName, $username, $hashedPassword, $postType, $jobType, $postNo, $releventDep, $observation, $email, $phone);
 
         if ($stmt->execute()) {
             ?>
@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
             ?>
             <script>
                 alert("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
-                console.error("Error: " + "<?php echo addslashes($stmt->error); ?>"); // Log error to console for debugging
+                console.error("Error: " + "<?php echo addslashes($stmt->error); ?>");
             </script>
             <?php
         }

@@ -11,6 +11,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $employee = $result->fetch_assoc();
 
+// Check if the form is submitted
 if (isset($_POST['update'])) {
     $id = $_POST['ID'];
     $name = $_POST['Name'];
@@ -18,25 +19,50 @@ if (isset($_POST['update'])) {
     $fatherName = $_POST['FatherName'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
+    $confirmPassword = $_POST['Conform_Password'];
     $postType = $_POST['PostType'];
     $jobType = $_POST['JobType'];
     $postNo = $_POST['PostNo'];
     $releventDep = $_POST['ReleventDep'];
     $observation = $_POST['Observation'];
+    $email = $_POST['Email']; // Added Email field
+    $phone = $_POST['Phone']; // Added Phone field
 
-    $sql = "UPDATE employee_register SET Name=?, LastName=?, FatherName=?, Username=?, Password=?, PostType=?, JobType=?, PostNo=?, ReleventDep=?, Observation=? WHERE ID=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssi", $name, $lastName, $fatherName, $username, $password, $postType, $jobType, $postNo, $releventDep, $observation, $id);
-    
-    if ($stmt->execute()) {
+    // Check if the password and confirm password match
+    if ($password !== $confirmPassword) {
         echo "<script>
-            alert('موفقانه ویرایش شد!');
-            window.location.href = '../dashboardpages/ShowEmployee.php';
+            alert('رمز عبور و تایید رمز عبور مطابقت ندارند!');
         </script>";
     } else {
-        echo "<script>
-            alert('خطا در ویرایش!');
-        </script>";
+        // Update query with email and phone
+        $sql = "UPDATE employee_register SET 
+                    Name = ?, 
+                    LastName = ?, 
+                    FatherName = ?, 
+                    Username = ?, 
+                    Password = ?, 
+                    PostType = ?, 
+                    JobType = ?, 
+                    PostNo = ?, 
+                    ReleventDep = ?, 
+                    Observation = ?, 
+                    Email = ?, 
+                    Phone = ? 
+                WHERE ID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssssssssssi", $name, $lastName, $fatherName, $username, $password, $postType, $jobType, $postNo, $releventDep, $observation, $email, $phone, $id);
+        
+        // Execute the update
+        if ($stmt->execute()) {
+            echo "<script>
+                alert('موفقانه ویرایش شد!');
+                window.location.href = '../dashboardpages/ShowEmployee.php';
+            </script>";
+        } else {
+            echo "<script>
+                alert('خطا در ویرایش!');
+            </script>";
+        }
     }
 }
 ?>
@@ -56,15 +82,15 @@ if (isset($_POST['update'])) {
             background-color: #f8f9fa;
         }
         .sidebar {
-            height: 100vh; /* Make sidebar full height */
-            overflow-y: auto; /* Scroll if content overflows */
+            height: 100vh;
+            overflow-y: auto;
         }
         .main-content {
-            padding: 20px; /* Add padding to main content */
+            padding: 20px;
         }
         .header {
-            text-align: center; /* Center the heading */
-            margin-bottom: 30px; /* Add margin for spacing */
+            text-align: center;
+            margin-bottom: 30px;
             background: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
             color: DodgerBlue;
@@ -131,76 +157,88 @@ if (isset($_POST['update'])) {
 
                         <div class="form-col">
                             <label for="Report">اسم</label>
-                            <input type="text" id="Report" name="Name" class="form-control" value="<?php echo $employee['Name']; ?>" required>
+                            <input type="text" id="Report" name="Name" class="form-control" value="<?php echo isset($employee['Name']) ? htmlspecialchars($employee['Name']) : ''; ?>" required>
                         </div>
 
                         <div class="form-col">
                             <label for="Time">تخلص</label>
-                            <input type="text" id="Time" name="LastName" class="form-control" value="<?php echo $employee['LastName']; ?>" required>
+                            <input type="text" id="Time" name="LastName" class="form-control" value="<?php echo isset($employee['LastName']) ? htmlspecialchars($employee['LastName']) : ''; ?>" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-col">
                             <label for="Plane">ولد</label>
-                            <input type="text" id="Plane" name="FatherName" class="form-control" value="<?php echo $employee['FatherName']; ?>" required>
+                            <input type="text" id="Plane" name="FatherName" class="form-control" value="<?php echo isset($employee['FatherName']) ? htmlspecialchars($employee['FatherName']) : ''; ?>" required>
                         </div>
 
                         <div class="form-col">
                             <label for="solve">عنوان بست</label>
-                            <input type="text" id="solve" name="PostType" class="form-control" value="<?php echo $employee['PostType']; ?>" required>
+                            <input type="text" id="solve" name="PostType" class="form-control" value="<?php echo isset($employee['PostType']) ? htmlspecialchars($employee['PostType']) : ''; ?>" required>
                         </div>
 
                         <div class="form-col">
                             <label for="signature">نوعیت وظیفه</label>
-                            <input type="text" id="signature" name="JobType" class="form-control" value="<?php echo $employee['JobType']; ?>" required>
+                            <input type="text" id="signature" name="JobType" class="form-control" value="<?php echo isset($employee['JobType']) ? htmlspecialchars($employee['JobType']) : ''; ?>" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-col">
                             <label for="persent">کاربر</label>
-                            <input type="text" id="persent" name="Username" class="form-control" value="<?php echo $employee['Username']; ?>" required>
+                            <input type="text" id="persent" name="Username" class="form-control" value="<?php echo isset($employee['Username']) ? htmlspecialchars($employee['Username']) : ''; ?>" required>
                         </div>
 
                         <div class="form-col position-relative">
                             <label for="state">رمز عبور</label>
-                            <input type="password" id="state" name="Password" class="form-control" value="<?php echo $employee['Password']; ?>" required>
+                            <input type="password" id="state" name="Password" class="form-control" value="<?php echo isset($employee['Password']) ? htmlspecialchars($employee['Password']) : ''; ?>" required>
                             <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword1" onclick="togglePassword('state', 'togglePassword1')"></i>
                         </div>
 
                         <div class="form-col position-relative">
                             <label for="prob">تایید رمز عبور</label>
-                            <input type="password" id="prob" name="Conform_Password" class="form-control" value="<?php echo $employee['Password']; ?>" required>
+                            <input type="password" id="prob" name="Conform_Password" class="form-control" value="<?php echo isset($employee['Password']) ? htmlspecialchars($employee['Password']) : ''; ?>" required>
                             <i class="bi bi-eye-slash position-absolute top-50 start-0 me-3 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword2" onclick="togglePassword('prob', 'togglePassword2')"></i>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-col">
+                            <label for="email">ایمیل</label>
+                            <input type="email" id="email" name="Email" class="form-control" value="<?php echo isset($employee['Email']) ? htmlspecialchars($employee['Email']) : ''; ?>" required>
+                        </div>
+
+                        <div class="form-col">
+                            <label for="phone">شماره تماس</label>
+                            <input type="text" id="phone" name="Phone" class="form-control" value="<?php echo isset($employee['Phone']) ? htmlspecialchars($employee['Phone']) : ''; ?>" required>
+                        </div>
+
+                        <div class="form-col">
                             <label for="filling">شماره بست</label>
-                            <input type="text" id="filling" name="PostNo" class="form-control" value="<?php echo $employee['PostNo']; ?>" required>
+                            <input type="text" id="filling" name="PostNo" class="form-control" value="<?php echo isset($employee['PostNo']) ? htmlspecialchars($employee['PostNo']) : ''; ?>" required>
                         </div>
 
                         <div class="form-col">
                             <label for="remark">بخش مربوطه</label>
-                            <input type="text" id="remark" name="ReleventDep" class="form-control" value="<?php echo $employee['ReleventDep']; ?>" required>
+                            <input type="text" id="remark" name="ReleventDep" class="form-control" value="<?php echo isset($employee['ReleventDep']) ? htmlspecialchars($employee['ReleventDep']) : ''; ?>" required>
                         </div>
+                    </div>
 
+                    <div class="form-row">
                         <div class="form-col">
                             <label for="notes">ملاحضات</label>
-                            <input type="text" id="signature" name="Observation" class="form-control" value="<?php echo htmlspecialchars($employee['Observation']); ?>">
+                            <input type="text" id="signature" name="Observation" class="form-control" value="<?php echo isset($employee['Observation']) ? htmlspecialchars($employee['Observation']) : ''; ?>">
                         </div>
                     </div>
 
                     <div class="form-row" style="justify-content: center;">
-                    <button type="submit" name="update" class="btn btn-primary">بروز رسانی</button>
+                        <button type="submit" name="update" class="btn btn-primary">بروز رسانی</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    
+
     <script>
         function togglePassword(inputId, iconId) {
             const input = document.getElementById(inputId);
@@ -211,8 +249,7 @@ if (isset($_POST['update'])) {
         }
 
         function validateForm() {
-            // Add any form validation if needed
-            return true;
+            return true; // Add any form validation if needed
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
