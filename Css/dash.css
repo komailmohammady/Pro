@@ -156,3 +156,17 @@ footer {
         /* Adjust margin */
     }
 }
+
+.btn {
+    background: #073B4C;
+    color: white;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn:hover {
+    background: #032631;
+    color: white;
+}

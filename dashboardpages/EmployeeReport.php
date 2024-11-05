@@ -7,87 +7,41 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../Css/dash.css" type="text/css" type="text/css">
-    <link rel="stylesheet" href="../Css/Employee_Report.css" type="text/css">
     <link rel="stylesheet" href="../Css/kamadatepicker.min.css" type="text/css">
-    <style>
-        body {
-        background-color: #f8f9fa;
-        }
-        .form-control {
-            height: 40px;
-        }
-        .sidebar {
-            height: 100vh; /* Make sidebar full height */
-            overflow-y: auto; /* Scroll if content overflows */
-        }
-        .main-content {
-            padding: 20px; /* Add padding to main content */
-        }
-        .header {
-            text-align: center; /* Center the heading */
-            margin-bottom: 30px; /* Add margin for spacing */
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-
-            color: DodgerBlue;
-            padding: 20px;
-            border-radius: 20px;
-        }
-        .header h1 {
-            font-size: 2rem; /* Increase font size */
-            font-weight: bold; /* Make it bold */
-        }
-        .btn {
-            padding: 10px;
-            background-color: DodgerBlue;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'B Nazanin';
-            font-weight: bold;
-            width: 330px;
-        }
-    </style>
 </head>
 <body dir="rtl">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <img src="../img/logo.png" alt="لوگوی داشبورد" class="logo-img">
-                <a href="../index.php"><i class="bi bi-house-door"></i> داشبورد</a>
-
-                <a href="#employeesMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> کارمندان
-                    <i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <div id="employeesMenu" class="collapse">
-                    <ul>
-                        <li><a href="EmployeeRegister.php" class="d-block">ثبت کارمند</a></li>
-                        <li><a href="ShowEmployee.php" class="d-block">لیست کارمندان</a></li>
-                    </ul>
-                </div>
-
-                <a href="#reportsMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
-                    <i class="bi bi-file-earmark-text"></i> گزارشات
-                    <i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <div id="reportsMenu" class="collapse">
-                    <ul>
-                        <li><a href="EmployeeReport.php" class="d-block">ثبت گزارش</a></li>
-                        <li><a href="ShowEmployeeReport.php" class="d-block">لیست گزارشات</a></li>
-                    </ul>
-                </div>
-
-                <a href="logout.html"><i class="bi bi-box-arrow-right"></i> خروج</a>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+            <img src="../img/logo.png" alt="لوگوی داشبورد" class="logo-img mb-3">
+            <a href="../index.php"><i class="bi bi-house-door"></i> داشبورد</a>
+            <a href="#employeesMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-person"></i> کارمندان
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="employeesMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeRegister.php" class="d-block">ثبت کارمند</a></li>
+                    <li><a href="ShowEmployee.php" class="d-block">لیست کارمندان</a></li>
+                </ul>
             </div>
-            
+            <a href="#reportsMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-file-earmark-text"></i> گزارشات
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="reportsMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeReport.php" class="d-block">ثبت گزارش</a></li>
+                    <li><a href="ShowEmployeeReport.php" class="d-block">لیست گزارشات</a></li>
+                </ul>
+            </div>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-chat-left-text"></i> ارسال پیام</a>
+                <a href="../PHP/logout.php"><i class="bi bi-box-arrow-right"></i> خروج</a>
+            </div>
             <!-- Main Content Area -->
-            <div class="col-md-10 main-content">
-                <div class="header">
+            <div class="col-md-10 content mr-2">
+            <div class="header">
                     <h1>فارمت گزارشدهی کارمندان</h1>
                 </div>
 
@@ -144,6 +98,26 @@
                         <button type="submit" class="btn btn-primary">ثبت گزارشات</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ms-2" id="messageModalLabel">ارسال پیام</h5>
+                    <button type="button" class="btn-close ms-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="messageForm" action="">
+                        <div class="mb-3">
+                            <label for="message" class="form-label">پیام:</label>
+                            <textarea class="form-control" id="message" rows="12" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ارسال</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

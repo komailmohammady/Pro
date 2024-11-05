@@ -8,6 +8,8 @@ if (isset($_POST['submit'])) {
     $name = $_POST['Name'];
     $lastName = $_POST['LastName'];
     $fatherName = $_POST['FatherName'];
+    $phone = $_POST['Phone'];
+    $email = $_POST['Email'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $postType = $_POST['PostType'];
@@ -17,7 +19,7 @@ if (isset($_POST['submit'])) {
     $observation = $_POST['Observation'];
 
     // Checking if fields are filled
-    if (empty($id) || empty($name) || empty($lastName) || empty($fatherName) || empty($username) || empty($password) || empty($postType) || empty($jobType) || empty($postNo) || empty($releventDep)) {
+    if (empty($id) || empty($name) || empty($lastName) || empty($phone) || empty($email) || empty($fatherName) || empty($username) || empty($password) || empty($postType) || empty($jobType) || empty($postNo) || empty($releventDep)) {
         ?>
         <script>
             alert("لطفاً تمام فیلدها را پر کنید!");
@@ -29,7 +31,7 @@ if (isset($_POST['submit'])) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepare the SQL statement
-        $stmt = $conn->prepare("INSERT INTO employee_register (ID, Name, LastName, FatherName, Username, Password, PostType, JobType, PostNo, ReleventDep, Observation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO employee_register (ID, Name, LastName, FatherName,Phone, Email, Username, Password, PostType, JobType, PostNo, ReleventDep, Observation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("issssssssss", $id, $name, $lastName, $fatherName, $username, $hashedPassword, $postType, $jobType, $postNo, $releventDep, $observation);
 
         if ($stmt->execute()) {

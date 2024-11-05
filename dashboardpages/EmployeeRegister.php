@@ -47,7 +47,7 @@
             </div>
 
             <!-- فرم ثبت کارمند -->
-            <form action="../PHP/EmployeeRegisterAddCodes.php" method="post" id="form" onsubmit="return validateForm()">
+            <form action="../PHP/EmployeeRegisterAddCodes.php" method="post" id="form">
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="UserName">آی‌دی</label>
@@ -76,7 +76,7 @@
                         <label for="email">ایمیل</label>
                         <input type="email" id="email" name="Email" class="form-control">
                     </div>
-                    <div class="col-12 col-md-4 form-col">
+                    <div class="col-md-4 mb-3">
                             <label for="Post_No">بست</label>
                             <select name="PostNo" class="form-control" required>
                                 <option value="بست اول">بست اول</option>
@@ -90,7 +90,7 @@
                         <label for="signature">عنوان بست</label>
                         <input type="text" id="signature" name="JobType" class="form-control">
                     </div>
-                    <div class="col-12 col-md-4 form-col">
+                    <div class="col-md-4 mb-3">
                             <label for="Relevant_Department">آمریت مربوطه</label>
                             <select name="ReleventDep" class="form-control" required>
                                 <option value="آمریت امور مکاتب">آمریت امور مکاتب</option>
@@ -106,14 +106,13 @@
                         <label for="jobType">نوعیت وظیفه</label>
                         <input type="text" id="jobType" name="JobType" class="form-control">
                     </div>
-                    <div class="col-12 col-md-8">
+                    <div class="col-md-8 mb-3">
                             <label for="Observation">ملاحظات</label>
-                            <textarea name="Observation" id="Observation" class="form-control" required></textarea>
+                            <textarea name="Observation" id="Observation" class="form-control"></textarea>
                         </div>
                 </div>
 
                 <div class="row">
-
                     <div class="col-md-4 mb-3">
                         <label for="persent">کاربر</label>
                         <input type="text" id="persent" name="Username" class="form-control">

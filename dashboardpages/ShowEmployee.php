@@ -3,7 +3,7 @@
 include '../PHP/ConnectionToDatabase.php';
 
 // Fetch all employee records from the database
-$sql = "SELECT ID, Name, LastName, FatherName, Username, PostType, JobType, ReleventDep, PostNo, Observation FROM employee_register";
+$sql = "SELECT ID, Name, LastName, FatherName, Phone, Email, Username, PostType, JobType, ReleventDep, PostNo, Observation FROM employee_register";
 $result = $conn->query($sql);
 ?>
 
@@ -15,57 +15,58 @@ $result = $conn->query($sql);
     <title>جدول کارمندان</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../Css/dash.css" type="text/css">
     <script src="../js/script.js"></script>
-    <style>
-        * {
-            font-family: 'B Nazanin';
-        }
-        .table-custom {
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 0;
-        }
-        .table-custom th {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-        }
-        .table-custom td {
-            text-align: center;
-        }
-        .table-custom .btn {
-            margin: 1px;
-        }
-        .table-responsive {
-            margin: 0;
-        }
-    </style>
 </head>
 <body dir="rtl">
-<div class="container mt-5">
-    <!-- Sidebar -->
-    <div class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-4"><b>لیست کارمندان ریاست امور متعلمین و محصلین</b></h2>
-        <button type="button" class="btn-close" aria-label="Close" onclick="closeForm()" style="transform: rotate(180deg);"></button>
-    </div>
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+            <img src="../img/logo.png" alt="لوگوی داشبورد" class="logo-img mb-3">
+            <a href="../index.php"><i class="bi bi-house-door"></i> داشبورد</a>
+            <a href="#employeesMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-person"></i> کارمندان
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="employeesMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeRegister.php" class="d-block">ثبت کارمند</a></li>
+                    <li><a href="ShowEmployee.php" class="d-block">لیست کارمندان</a></li>
+                </ul>
+            </div>
+            <a href="#reportsMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-file-earmark-text"></i> گزارشات
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="reportsMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeReport.php" class="d-block">ثبت گزارش</a></li>
+                    <li><a href="ShowEmployeeReport.php" class="d-block">لیست گزارشات</a></li>
+                </ul>
+            </div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-chat-left-text"></i> ارسال پیام</a>
+            <a href="../PHP/logout.php"><i class="bi bi-box-arrow-right"></i> خروج</a>
+        </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-custom">
-            <thead>
-                <tr>
-                    <th>آی دی</th>
-                    <th>اسم</th>
-                    <th>تخلص</th>
-                    <th>ولد</th>
-                    <th>نام کاربر</th>
-                    <th>عنوان بست</th>
-                    <th>نوعیت وظیفه</th>
-                    <th>آمریت مربوطه</th>
-                    <th>بست</th>
-                    <th>ملاحظات</th>
-                    <th>عملیات</th>
+        <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mb-4"><b>لیست کارمندان ریاست امور متعلمین و محصلین</b></h2>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="closeForm()" style="transform: rotate(180deg);"></button>
+                </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-custom">
+                    <thead>
+                        <tr>
+                            <th>آی دی</th>
+                            <th>اسم</th>
+                <th>تخلص</th>
+                <th>ولد</th>
+                <th>نام کاربر</th>
+                <th>عنوان بست</th>
+                <th>نوعیت وظیفه</th>
+                <th>آمریت مربوطه</th>
+                <th>بست</th>
+                <th>ملاحظات</th>
+                <th>عملیات</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +79,8 @@ $result = $conn->query($sql);
                             <td>" . htmlspecialchars($row['Name']) . "</td>
                             <td>" . htmlspecialchars($row['LastName']) . "</td>
                             <td>" . htmlspecialchars($row['FatherName']) . "</td>
+                            <td>" . htmlspecialchars($row['Phone']) . "</td>
+                            <td>" . htmlspecialchars($row['Email']) . "</td>
                             <td>" . htmlspecialchars($row['Username']) . "</td>
                             <td>" . htmlspecialchars($row['PostType']) . "</td>
                             <td>" . htmlspecialchars($row['JobType']) . "</td>

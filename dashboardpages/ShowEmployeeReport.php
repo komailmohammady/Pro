@@ -33,78 +33,38 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="../Css/kamadatepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../Css/dash.css" type="text/css">
     <script src="../js/script.js"></script>
-    <style>
-        * {
-            font-family: 'B Nazanin';
-        }
-        .table-custom {
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 0;
-        }
-        .table-custom th {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-        }
-        .table-custom td {
-            text-align: center;
-        }
-        .table-responsive {
-            margin: 0;
-        }
-        .filter-form {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        .form-label {
-            font-weight: bold;
-        }
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-        }
-        .btn-success:hover {
-            background-color: #218838;
-        }
-        .btn-icon {
-            font-size: 1.2em;
-            padding: 0.2em 0.5em;
-        }
-
-        /* Print styles */
-        @media print {
-            .hide-on-print {
-                display: none;
-            }
-            .filter-form, .print-buttons {
-                display: none;
-            }
-            .table-responsive {
-                overflow: visible !important;
-            }
-            .table-custom {
-                page-break-inside: avoid;
-            }
-        }
-
-        /* Header styles */
-        h2 {
-            font-size: 18px;
-        }
-        h2 p {
-            font-size: 14px;
-            margin: 0;
-        }
-    </style>
 </head>
 <body dir="rtl">
-<div class="container mt-5">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+            <img src="../img/logo.png" alt="لوگوی داشبورد" class="logo-img mb-3">
+            <a href="../index.php"><i class="bi bi-house-door"></i> داشبورد</a>
+            <a href="#employeesMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-person"></i> کارمندان
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="employeesMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeRegister.php" class="d-block">ثبت کارمند</a></li>
+                    <li><a href="ShowEmployee.php" class="d-block">لیست کارمندان</a></li>
+                </ul>
+            </div>
+            <a href="#reportsMenu" data-bs-toggle="collapse" aria-expanded="false" class="d-flex align-items-center">
+                <i class="bi bi-file-earmark-text"></i> گزارشات
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <div id="reportsMenu" class="collapse">
+                <ul>
+                    <li><a href="EmployeeReport.php" class="d-block">ثبت گزارش</a></li>
+                    <li><a href="ShowEmployeeReport.php" class="d-block">لیست گزارشات</a></li>
+                </ul>
+            </div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-chat-left-text"></i> ارسال پیام</a>
+            <a href="../PHP/logout.php"><i class="bi bi-box-arrow-right"></i> خروج</a>
+        </div>
+<div class="container">
     <!-- Header with Logo Placeholders -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
