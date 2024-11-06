@@ -45,7 +45,7 @@
                     <h1><b>فارمت گزارشدهی کارمندان</b></h1>
                 </div>
 
-                <form action="../PHP/EmployeeReportAdd.php" method="post" id="form" enctype="multipart/form-data">
+                <form action="../PHP/EmployeeRegisterAddCodes.php" method="post" id="form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="Report">گزارش فعالیت های انجام شده</label>
@@ -58,7 +58,7 @@
                         <div class="col-md-4 mb-3">
                             <label for="Plane">پلان</label>
                             <select name="Plane" class="form-control">
-                                <option value="پلان مربوطه">پلان عملیاتی</option>
+                                <option value="پلان عملیاتی">پلان عملیاتی</option>
                                 <option value="خارج از پلان">خارج از پلان</option>
                             </select>
                         </div>

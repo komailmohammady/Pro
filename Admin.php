@@ -1,27 +1,3 @@
-<?php  
-include 'PHP/ConnectionToDatabase.php';
-
-// Fetch internal plan data
-$sql_internal = "SELECT e.Did_Reports, 
-                        COALESCE(SUM(CAST(REPLACE(er.improve_precentage, '%', '') AS UNSIGNED)), 0) AS total_percentage 
-                 FROM (SELECT DISTINCT Did_Reports FROM employeereport) e
-                 LEFT JOIN employeereport er 
-                       ON e.Did_Reports = er.Did_Reports AND er.Plane IN ('پلان مربوطه')
-                 GROUP BY e.Did_Reports";
-
-// Prepare data for JavaScript
-$chartDataInternal = [];
-
-// Get internal plan data
-if ($result_internal = $conn->query($sql_internal)) {
-    while($row = $result_internal->fetch_assoc()) {
-        $chartDataInternal[$row['Did_Reports']] = (int)$row['total_percentage'];
-    }
-}
-
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -32,16 +8,6 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Css/dash.css" type="text/css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <style>
-        .chart-container {
-            height: 300px; /* Adjust the height to make the chart smaller */
-            max-height: 300px; /* Maximum height of the chart */
-        }
-    </style>
-
     <script>
         setInterval(function() {
             fetch('get_total_reports.php')
@@ -58,66 +24,6 @@ $conn->close();
                 document.getElementById('EmployeeReport').innerText = data.total_ShowEmployeeReport;
             });
         }, 60000);
-
-        // Load the Visualization API and the corechart package
-        google.charts.load('current', {'packages':['corechart']});
-        
-        // Set a callback to run when the Google Visualization API is loaded
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            // Prepare the data
-            var chartDataInternal = <?php echo json_encode($chartDataInternal); ?>;
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Did Reports');
-            data.addColumn('number', ' ');
-
-            // Add rows of data
-            Object.keys(chartDataInternal).forEach(function(key) {
-                data.addRow([key, chartDataInternal[key]]);
-            });
-
-            // Set chart options
-            var options = {
-                title: ' ',
-                height: 300, // Set the height of the chart
-                legend: { position: 'bottom' },
-                hAxis: {
-                    title: 'Did Reports'
-                },
-                vAxis: {
-                    title: '',
-                    minValue: 0
-                }
-            };
-
-            // Instantiate and draw the chart
-            var chart = new google.visualization.ColumnChart(document.getElementById('myChart'));
-            chart.draw(data, options);
-        }
-        // Pie Chart 
-        google.charts.load('current', { packages: ['corechart'] });
-        google.charts.setOnLoadCallback(drawPieChart);
-
-        function drawPieChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['برچسب', 'مقدار'],
-                ['درآمد', 1000],
-                ['هزینه', 400],
-                ['سود', 300],
-                ['زیان', 100]
-            ]);
-
-            var options = {
-                title: 'نمودار دایره‌ای درآمد و هزینه',
-                pieHole: 0.4, // For donut chart, you can adjust this value
-                height: 300,
-                width: '100%'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-            chart.draw(data, options);
-        }
     </script>
 </head>
 <body dir="rtl">
@@ -147,8 +53,9 @@ $conn->close();
                     <li><a href="dashboardpages/ShowEmployeeReport.php" class="d-block">لیست گزارشات</a></li>
                 </ul>
             </div>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-chat-left-text"></i> ارسال پیام</a>
-            <a href="PHP/logout.php"><i class="bi bi-box-arrow-right"></i> خروج</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-box-arrow-right"></i> ارسال پیام</a>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="bi bi-gear"></i> تنظیمات</a> <!-- Updated Icon -->
+            <a href="logout.html"><i class="bi bi-box-arrow-right"></i> خروج</a>
         </div>
 
         <!-- Main Content -->
@@ -168,16 +75,13 @@ $conn->close();
                     </div>
                 </div>
                 
-                <!-- Main Content of Dashboard -->
-                <div class="chart-container mt-4">
-                    <div id="myChart" class="chart-container"></div>
-                </div>
-
-                <div class="container mt-5">
-                    <h2 class="text-center">نمودار دایره‌ای</h2>
-                    <div id="pieChart" style="width: 80%; height: 400px;"></div>
-                </div>
+                <!-- This is the main content of index -->
                 
+                <!-- فوتر -->
+                <footer>
+                    <p>&copy; 2024 تمامی حقوق محفوظ است. طراحی شده توسط محصلین ممتاز تکنالوژی کمپیوتر.</p>
+                </footer>
+
                 <!-- Message Modal -->
                 <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -201,14 +105,11 @@ $conn->close();
 
                 <!-- Bootstrap JS and dependencies -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="js/Search.js"></script>
+                <script src="js/Search.js"></script> <!-- لینک به فایل جاوا اسکریپت خارجی -->
             </div>
         </div>
     </div>
 </div>
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 تمامی حقوق محفوظ است. طراحی شده توسط محصلین ممتاز تکنالوژی کمپیوتر.</p>
-</footer>
 </body>
 </html>
+

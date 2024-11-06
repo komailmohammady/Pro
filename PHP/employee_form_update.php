@@ -76,41 +76,6 @@ if (isset($_POST['update'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../Css/dash.css" type="text/css">
-    <link rel="stylesheet" href="../Css/Employee_Report.css" type="text/css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .sidebar {
-            height: 100vh;
-            overflow-y: auto;
-        }
-        .main-content {
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-            color: DodgerBlue;
-            padding: 20px;
-            border-radius: 20px;
-        }
-        .btn {
-            padding: 10px;
-            background-color: DodgerBlue;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'B Nazanin';
-            font-weight: bold;
-            width: 330px;
-        }
-    </style>
 </head>
 <body dir="rtl">
     <div class="container-fluid">
@@ -145,94 +110,97 @@ if (isset($_POST['update'])) {
                 <a href="logout.html"><i class="bi bi-box-arrow-right"></i> خروج</a>
             </div>
 
-            <div class="col-md-10 main-content mt-5">
+            <div class="col-md-10 content mr-2">
+            <div class="header text-center mt-3 mb-4">
+                <h1><b>ویرایش فرم</b></h1>
+            </div>
                 <form action="employee_form_update.php" method="post" id="form" onsubmit="return validateForm()">
                     <input type="hidden" name="ID" value="<?php echo $employee['ID']; ?>">
                     
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="UserName">آي دی</label>
                             <input type="number" id="UserName" name="ID" class="form-control" value="<?php echo $employee['ID']; ?>" disabled>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="Report">اسم</label>
                             <input type="text" id="Report" name="Name" class="form-control" value="<?php echo isset($employee['Name']) ? htmlspecialchars($employee['Name']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="Time">تخلص</label>
                             <input type="text" id="Time" name="LastName" class="form-control" value="<?php echo isset($employee['LastName']) ? htmlspecialchars($employee['LastName']) : ''; ?>" required>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="Plane">ولد</label>
                             <input type="text" id="Plane" name="FatherName" class="form-control" value="<?php echo isset($employee['FatherName']) ? htmlspecialchars($employee['FatherName']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="solve">عنوان بست</label>
                             <input type="text" id="solve" name="PostType" class="form-control" value="<?php echo isset($employee['PostType']) ? htmlspecialchars($employee['PostType']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="signature">نوعیت وظیفه</label>
                             <input type="text" id="signature" name="JobType" class="form-control" value="<?php echo isset($employee['JobType']) ? htmlspecialchars($employee['JobType']) : ''; ?>" required>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="persent">کاربر</label>
                             <input type="text" id="persent" name="Username" class="form-control" value="<?php echo isset($employee['Username']) ? htmlspecialchars($employee['Username']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col position-relative">
+                        <div class="col-md-4 mb-3 position-relative">
                             <label for="state">رمز عبور</label>
                             <input type="password" id="state" name="Password" class="form-control" value="<?php echo isset($employee['Password']) ? htmlspecialchars($employee['Password']) : ''; ?>" required>
                             <i class="bi bi-eye-slash position-absolute top-50 start-0 me-2 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword1" onclick="togglePassword('state', 'togglePassword1')"></i>
                         </div>
 
-                        <div class="form-col position-relative">
+                        <div class="col-md-4 mb-3 position-relative">
                             <label for="prob">تایید رمز عبور</label>
                             <input type="password" id="prob" name="Conform_Password" class="form-control" value="<?php echo isset($employee['Password']) ? htmlspecialchars($employee['Password']) : ''; ?>" required>
                             <i class="bi bi-eye-slash position-absolute top-50 start-0 me-3 toggle-icon" style="cursor: pointer;margin-left:10px;margin-top:5px;" id="togglePassword2" onclick="togglePassword('prob', 'togglePassword2')"></i>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="email">ایمیل</label>
                             <input type="email" id="email" name="Email" class="form-control" value="<?php echo isset($employee['Email']) ? htmlspecialchars($employee['Email']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="phone">شماره تماس</label>
                             <input type="text" id="phone" name="Phone" class="form-control" value="<?php echo isset($employee['Phone']) ? htmlspecialchars($employee['Phone']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="filling">شماره بست</label>
                             <input type="text" id="filling" name="PostNo" class="form-control" value="<?php echo isset($employee['PostNo']) ? htmlspecialchars($employee['PostNo']) : ''; ?>" required>
                         </div>
 
-                        <div class="form-col">
+                        <div class="col-md-4 mb-3">
                             <label for="remark">بخش مربوطه</label>
                             <input type="text" id="remark" name="ReleventDep" class="form-control" value="<?php echo isset($employee['ReleventDep']) ? htmlspecialchars($employee['ReleventDep']) : ''; ?>" required>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-col">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="notes">ملاحضات</label>
                             <input type="text" id="signature" name="Observation" class="form-control" value="<?php echo isset($employee['Observation']) ? htmlspecialchars($employee['Observation']) : ''; ?>">
                         </div>
                     </div>
 
-                    <div class="form-row" style="justify-content: center;">
-                        <button type="submit" name="update" class="btn btn-primary">بروز رسانی</button>
+                    <div class="col-md-4 mb-3">
+                        <button type="submit" name="update" class="btnn">بروز رسانی</button>
                     </div>
                 </form>
             </div>
